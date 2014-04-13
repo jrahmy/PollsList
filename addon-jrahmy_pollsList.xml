@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="jrahmy_pollsList" title="Polls List" version_string="2.0.0" version_id="200" url="http://xenforo.com/community/members/jeremy-p.450/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates/>
+  <admin_template_modifications/>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="file_health_check" execute_order="10" callback_class="Jrahmy\PollsList\Listener" callback_method="fileHealthCheck" active="1" hint="" description="Adds file hashes to health check"/>
+    <listener event_id="load_class_model" execute_order="10" callback_class="Jrahmy\PollsList\Listener" callback_method="loadClassModel" active="1" hint="XenForo_Model_Poll" description="Extends XenForo_Model_Poll to add getRecentPolls()"/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups>
+    <group group_id="jrahmy_pollsList" display_order="1000" debug_only="0"/>
+    <option option_id="jrahmy_pollsList_max" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+      <default_value>10</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="jrahmy_pollsList" display_order="0"/>
+    </option>
+  </optiongroups>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="jrahmy_pollsList_recent_polls" version_id="0" version_string="1.0.0"><![CDATA[Recent Polls]]></phrase>
+    <phrase title="jrahmy_pollsList_showing_total_recent_polls" version_id="0" version_string="1.0.0"><![CDATA[Showing {total} recent polls]]></phrase>
+    <phrase title="jrahmy_pollsList_there_no_polls_to_display" version_id="7" version_string="1.0.0 Alpha 8"><![CDATA[There are no polls to display.]]></phrase>
+    <phrase title="jrahmy_pollsList_viewing_recent_polls" version_id="0" version_string="1.0.0"><![CDATA[Viewing recent polls]]></phrase>
+    <phrase title="jrahmy_pollsList_votes" version_id="0" version_string="1.0.0"><![CDATA[Votes]]></phrase>
+    <phrase title="option_group_jrahmy_pollsList" version_id="0" version_string="1.0.0"><![CDATA[Polls List]]></phrase>
+    <phrase title="option_group_jrahmy_pollsList_description" version_id="0" version_string="1.0.0"><![CDATA[Options for the list of recent polls]]></phrase>
+    <phrase title="option_jrahmy_pollsList_max" version_id="0" version_string="1.0.0"><![CDATA[Max Polls]]></phrase>
+    <phrase title="option_jrahmy_pollsList_max_explain" version_id="0" version_string="1.0.0"><![CDATA[The maximum number of polls to display]]></phrase>
+  </phrases>
+  <route_prefixes>
+    <route_type type="public">
+      <prefix original_prefix="polls" class="Jrahmy\PollsList\Route\Prefix\Polls" build_link="data_only"/>
+    </route_type>
+  </route_prefixes>
+  <style_properties/>
+  <templates>
+    <template title="jrahmy_pollsList_list" version_id="2" version_string="1.0.2"><![CDATA[<xen:require css="discussion_list.css" />
+
+<xen:title>{xen:phrase jrahmy_pollsList_recent_polls}</xen:title>
+
+<div class="discussionList sectionMain">
+	<dl class="sectionHeaders">
+		<dt class="posterAvatar"></dt>
+		<dd class="main">
+			<a class="title"><span>{xen:phrase question}</span></a>
+			<a class="postDate"><span>{xen:phrase start_date}</span></a>
+		</dd>
+		<dd class="stats">
+			<a class="major"><span>{xen:phrase jrahmy_pollsList_votes}</span></a>
+			<a class="minor"><span>{xen:phrase replies}</span></a>
+		</dd>
+		<dd class="lastPost"><a><span>{xen:phrase last_message}</span></a></dd>
+	</dl>
+
+	<ol class="discussionListItems">
+	<xen:if is="{$polls}">
+		<xen:foreach loop="$polls" value="$poll">
+			<xen:include template="jrahmy_pollsList_list_item" />
+		</xen:foreach>
+	<xen:else />
+		<li class="primaryContent">{xen:phrase jrahmy_pollsList_there_no_polls_to_display}</li>
+	</xen:if>
+	</ol>
+        <xen:if is="{$polls}">
+                <div class="sectionFooter SelectionCountContainer">
+		        <span class="contentSummary">{xen:phrase jrahmy_pollsList_showing_total_recent_polls, 'total={xen:number $pollsTotal}'}</span>
+		</div>
+        </xen:if>
+</div>]]></template>
+    <template title="jrahmy_pollsList_list_item" version_id="2" version_string="1.0.2"><![CDATA[<xen:require css="discussion_list.css" />
+
+<li id="poll-{$poll.content_id}" class="discussionListItem {$poll.discussion_state} {xen:if {$poll.sticky}, 'sticky'}" data-author="{$poll.username}">
+
+	<div class="listBlock posterAvatar">
+		<span class="avatarContainer">
+			<xen:avatar user="$poll.userInfo" size="s" img="true" />
+		</span>
+	</div>
+
+	<div class="listBlock main">
+
+		<div class="titleText">
+			<h3 class="title">
+				<!-- TODO: Thread prefix here -->
+				<a href="{xen:link threads, $poll}">{xen:helper wrap, $poll.question, 50}</a>
+			</h3>
+
+			<div class="secondRow">
+				<div class="posterDate muted">
+					<a href="{xen:link members, $poll}" class="username" title="{xen:phrase thread_starter}">{$poll.username}</a>,
+					<a{xen:if {$visitor.user_id}, ' href="{xen:link threads, $poll}"'} class="faint"><xen:datetime time="$poll.post_date" /></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="listBlock stats pairsJustified" title="{xen:phrase members_who_liked_first_message}: {xen:number $poll.first_post_likes}">
+		<dl class="major"><dt>{xen:phrase jrahmy_pollsList_votes}:</dt> <dd>{xen:number $poll.voter_count}</dd></dl>
+		<dl class="minor"><dt>{xen:phrase replies}:</dt> <dd>{xen:number $poll.reply_count}</dd></dl>
+	</div>
+
+	<div class="listBlock lastPost">
+			<dl class="lastPostInfo">
+				<dt><a href="{xen:link members, $poll.lastPostInfo}" class="username">{$poll.lastPostInfo.username}</a></dt>
+				<dd class="muted"><a{xen:if '{$visitor.user_id}', ' href="{xen:link posts, $poll.lastPostInfo}" title="{xen:phrase go_to_last_message}"'} class="dateTime"><xen:datetime time="$poll.lastPostInfo.post_date" /></a></dd>
+			</dl>
+	</div>
+
+</li>]]></template>
+    <template title="jrahmy_pollsList_navigation_list_item" version_id="0" version_string="1.0.0"><![CDATA[<li><a href="{xen:link polls}">{xen:phrase jrahmy_pollsList_recent_polls}</a></li>]]></template>
+  </templates>
+  <public_template_modifications>
+    <modification template="navigation" modification_key="jrahmy_pollsList_navigation" description="Adds recent polls to the forum quicklinks" execution_order="10" enabled="1" action="str_replace">
+      <find><![CDATA[<xen:if is="{$visitor.user_id}"><li><a href="{xen:link 'forums/-/mark-read', $forum, 'date={$serverTime}'}" class="OverlayTrigger">{xen:phrase mark_forums_read}</a></li></xen:if>]]></find>
+      <replace><![CDATA[<xen:include template="jrahmy_pollsList_navigation_list_item" />
+$0]]></replace>
+    </modification>
+  </public_template_modifications>
+  <bb_code_media_sites/>
+</addon>
