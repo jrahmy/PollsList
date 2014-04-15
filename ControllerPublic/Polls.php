@@ -83,10 +83,8 @@ class Polls extends \XenForo_ControllerPublic_Abstract
      */
     public static function getSessionActivityDetailsForList(array $activities)
     {
-        return new XenForo_Phrase('jrahmy_pollsList_viewing_recent_polls');
+        return new \XenForo_Phrase('jrahmy_pollsList_viewing_recent_polls');
     }
-
-    // @todo: fix get model calls to omit \, XFCP hates \
 
     /**
      * @return \XenForo_Model_Poll The XenForo poll model
