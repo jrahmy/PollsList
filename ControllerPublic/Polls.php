@@ -27,9 +27,10 @@ class Polls extends \XenForo_ControllerPublic_Abstract
     {
         $this->canonicalizeRequestUrl(\XenForo_Link::buildPublicLink('polls'));
 
-        // grab recent polls
-        $max    = \XenForo_Application::getOptions()->jrahmy_pollsList_max;
-        $polls  = $this->getPollModel()->getRecentPolls($max);
+        // grab options
+        $max    = \XenForo_Application::get('options')->jrahmy_pollsList_max;
+        // grab polls, with some extra to cushion any hidden ones
+        $polls  = $this->getPollModel()->getRecentPolls($max * 2);
 
         // permissions stuff
         $ftpHelper          = $this->getHelper('ForumThreadPost');
@@ -42,6 +43,10 @@ class Polls extends \XenForo_ControllerPublic_Abstract
 
         $finals = [];
         foreach ($polls as $poll) {
+            if (count($finals) > $max) {
+                break;
+            }
+
             try {
                 // get thread data for poll
                 // throws exception if the user can't view the thread
