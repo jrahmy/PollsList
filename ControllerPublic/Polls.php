@@ -43,7 +43,7 @@ class Polls extends \XenForo_ControllerPublic_Abstract
 
         $finals = [];
         foreach ($polls as $poll) {
-            if (count($finals) > $max) {
+            if (count($finals) >= $max) {
                 break;
             }
 
