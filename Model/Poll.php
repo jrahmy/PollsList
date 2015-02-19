@@ -25,13 +25,13 @@ class Poll extends XFCP_Poll
      *
      * @return array An array of recent polls
      */
-    public function getRecentPolls($max = 10)
+    public function getRecentPolls($limit = 20)
     {
         return $this->_getDb()->fetchAll(
             "SELECT *
                 FROM xf_poll
                 ORDER BY poll_id DESC
-                LIMIT {$max}"
+                LIMIT {$limit}"
         );
     }
 }
