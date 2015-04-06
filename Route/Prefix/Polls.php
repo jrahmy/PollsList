@@ -21,11 +21,11 @@ class Polls implements \XenForo_Route_Interface
     /**
      * Match a specific route for an already matched prefix.
      *
-     * @param string                        $routePath Routing path.
-     * @param \Zend_Controller_Request_Http $request   The current request object.
-     * @param \XenForo_Router               $router    The XenForo Router.
+     * @param string                        $routePath Routing path
+     * @param \Zend_Controller_Request_Http $request   The current request object
+     * @param \XenForo_Router               $router    The XenForo Router
      *
-     * @return false|\XenForo_RouteMatch A route match.
+     * @return false|\XenForo_RouteMatch
      */
     public function match($routePath, \Zend_Controller_Request_Http $request, \XenForo_Router $router)
     {
