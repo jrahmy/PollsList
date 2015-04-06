@@ -23,7 +23,7 @@ class Listener
      *
      * It extends it with our custom class.
      *
-     * @param string $class  The class being loaded
+     * @param string $class  The class being loaded.
      * @param array  $extend An array of classes to extend it with.
      */
     public static function loadClassModel($class, array &$extend)
@@ -34,8 +34,8 @@ class Listener
     /**
      * Adds filesums to the XenForo File Health Check.
      *
-     * @param \XenForo_ControllerAdmin_Abstract $controller The current admin controller
-     * @param array                             $hashes     An array of filesums
+     * @param \XenForo_ControllerAdmin_Abstract $controller The current admin controller.
+     * @param array                             $hashes     An array of filesums.
      */
     public static function fileHealthCheck(\XenForo_ControllerAdmin_Abstract $controller, array &$hashes)
     {
