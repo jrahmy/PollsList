@@ -26,10 +26,10 @@ class FileSums
     public static function getHashes()
     {
         return [
-                'library/Jrahmy/PollsList/ControllerPublic/Polls.php' => '060f60cd39f0fc89b5ea614929b180e9',
-                'library/Jrahmy/PollsList/Listener.php' => '8625687a252220d5d33b0d4f55c321d0',
-                'library/Jrahmy/PollsList/Route/Prefix/Polls.php' => '2f92ee1b34e42ca0543ee6f2fe928afd',
-                'library/Jrahmy/PollsList/Model/Poll.php' => 'f642073ba5e6f5a148af2befaa6f724a',
+                'library/Jrahmy/PollsList/ControllerPublic/Polls.php' => '221c26b6ff07b830a95f7f3648915469',
+                'library/Jrahmy/PollsList/Listener.php' => '2368c8d509ca1dc5c90be12e4b5bcc11',
+                'library/Jrahmy/PollsList/Route/Prefix/Polls.php' => '16fcef73567011be5e638d0c39326930',
+                'library/Jrahmy/PollsList/Model/Poll.php' => 'b33a8016ef46db260e3e92ca989b42e2',
 
         ];
     }
