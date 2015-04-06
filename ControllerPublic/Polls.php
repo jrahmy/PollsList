@@ -21,7 +21,7 @@ class Polls extends \XenForo_ControllerPublic_Abstract
     /**
      * Displays a list of recent polls.
      *
-     * @return \XenForo_ControllerResponse_View A view object
+     * @return \XenForo_ControllerResponse_View A view object.
      */
     public function actionIndex()
     {
@@ -82,9 +82,9 @@ class Polls extends \XenForo_ControllerPublic_Abstract
     /**
      * Defines session activity details for this controller.
      *
-     * @param array $activities The activity information
+     * @param array $activities The activity information.
      *
-     * @return string Returns the session activity details
+     * @return string Returns the session activity details.
      */
     public static function getSessionActivityDetailsForList(array $activities)
     {
@@ -92,7 +92,7 @@ class Polls extends \XenForo_ControllerPublic_Abstract
     }
 
     /**
-     * @return \XenForo_Model_Poll The XenForo poll model
+     * @return \XenForo_Model_Poll The XenForo poll model.
      */
     protected function getPollModel()
     {
@@ -100,7 +100,7 @@ class Polls extends \XenForo_ControllerPublic_Abstract
     }
 
     /**
-     * @return \XenForo_Model_Thread The XenForo Thread Model
+     * @return \XenForo_Model_Thread The XenForo Thread Model.
      */
     protected function getThreadModel()
     {
@@ -108,7 +108,7 @@ class Polls extends \XenForo_ControllerPublic_Abstract
     }
 
     /**
-     * @return \XenForo_Model_User The XenForo User Model
+     * @return \XenForo_Model_User The XenForo User Model.
      */
     protected function getUserModel()
     {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="jrahmy_pollsList" title="Polls List" version_string="2.0.1" version_id="201" url="http://xenforo.com/community/members/jeremy-p.450/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="jrahmy_pollsList" title="Polls List" version_string="2.0.2" version_id="202" url="http://xenforo.com/community/members/jeremy-p.450/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties/>
