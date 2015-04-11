@@ -12,7 +12,7 @@
 namespace Jrahmy\PollsList\Route\Prefix;
 
 /**
- * Provides static methods to extend the XenForo API.
+ * Route and link builder for poll-specific actions.
  *
  * @author Jeremy P <http://xenforo.com/community/members/jeremy-p.450/>
  */
