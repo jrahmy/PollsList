@@ -21,7 +21,7 @@ class Poll extends XFCP_Poll
     /**
      * Grabs most recent polls.
      *
-     * @param string $max The maximum number of polls to fetch
+     * @param string $max The maximum number of polls to fetch, defaults to 20
      *
      * @return array An array of recent polls
      */
