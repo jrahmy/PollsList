@@ -104,14 +104,6 @@ class Polls extends \XenForo_ControllerPublic_Abstract
     }
 
     /**
-     * @return \XenForo_Model_Thread
-     */
-    protected function getThreadModel()
-    {
-        return $this->getModelFromCache('XenForo_Model_Thread');
-    }
-
-    /**
      * @return \XenForo_Model_User
      */
     protected function getUserModel()
