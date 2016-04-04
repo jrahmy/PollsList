@@ -27,8 +27,15 @@ class Polls implements \XenForo_Route_Interface
      *
      * @return false|\XenForo_RouteMatch
      */
-    public function match($routePath, \Zend_Controller_Request_Http $request, \XenForo_Router $router)
-    {
-        return $router->getRouteMatch('Jrahmy\PollsList\ControllerPublic\Polls', $routePath, 'forums');
+    public function match(
+        $routePath,
+        \Zend_Controller_Request_Http $request,
+        \XenForo_Router $router
+    ) {
+        return $router->getRouteMatch(
+            'Jrahmy\PollsList\ControllerPublic\Polls',
+            $routePath,
+            'forums'
+        );
     }
 }
