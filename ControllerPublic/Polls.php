@@ -1,21 +1,21 @@
 <?php
 
 /*
-* This file is part of a XenForo add-on.
-*
-* (c) Jeremy P <http://xenforo.com/community/members/jeremy-p.450/>
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of a XenForo add-on.
+ *
+ * (c) Jeremy P <https://xenforo.com/community/members/jeremy-p.450/>
+ *
+ * For the full copyright and license information, please view the LICENSE file
+ * that was distributed with this source code.
+ */
 
 namespace Jrahmy\PollsList\ControllerPublic;
 
 /**
-* A controller for polls.
-*
-* @author Jeremy P <http://xenforo.com/community/members/jeremy-p.450/>
-*/
+ * A controller for polls.
+ *
+ * @author Jeremy P <https://xenforo.com/community/members/jeremy-p.450/>
+ */
 class Polls extends \XenForo_ControllerPublic_Abstract
 {
     /**
