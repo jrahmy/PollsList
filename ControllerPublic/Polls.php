@@ -28,7 +28,7 @@ class Polls extends \XenForo_ControllerPublic_Abstract
         $this->canonicalizeRequestUrl(\XenForo_Link::buildPublicLink('polls'));
 
         // grab options
-        $max    = \XenForo_Application::get('options')->jrahmy_pollsList_max;
+        $max    = \XenForo_Application::getOptions()->jrahmy_pollsList_max;
         // grab polls, with some extra to cushion any hidden ones
         $polls  = $this->getPollModel()->getRecentPolls($max * 2);
 
