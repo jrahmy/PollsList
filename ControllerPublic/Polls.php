@@ -27,23 +27,26 @@ class Polls extends \XenForo_ControllerPublic_Abstract
     {
         $this->canonicalizeRequestUrl(\XenForo_Link::buildPublicLink('polls'));
 
-        // grab options
-        $max    = \XenForo_Application::getOptions()->jrahmy_pollsList_max;
-        // grab polls, with some extra to cushion any hidden ones
-        $polls  = $this->getPollModel()->getRecentPolls($max * 2);
+        $maxPolls = \XenForo_Application::getOptions()->jrahmy_pollsList_max;
+
+        // grab recent polls, with some extra to pad any hidden ones
+        $recentPolls = $this->getPollModel()->getRecentPolls($maxPolls * 2);
 
         // permissions stuff
-        $ftpHelper          = $this->getHelper('ForumThreadPost');
-        $visitor            = \XenForo_Visitor::getInstance();
+        $ftpHelper = $this->getHelper('ForumThreadPost');
+
+        $visitor = \XenForo_Visitor::getInstance();
+
         $threadFetchOptions = [
-            'readUserId' => $visitor['user_id'],
+            'readUserId'  => $visitor['user_id'],
             'watchUserId' => $visitor['user_id']
         ];
-        $forumFetchOptions  = ['readUserId' => $visitor['user_id']];
+        $forumFetchOptions = ['readUserId' => $visitor['user_id']];
 
-        $finals = [];
-        foreach ($polls as $poll) {
-            if (count($finals) >= $max) {
+        $polls = [];
+
+        foreach ($recentPolls as $poll) {
+            if (count($polls) >= $maxPolls) {
                 break;
             }
 
@@ -57,19 +60,20 @@ class Polls extends \XenForo_ControllerPublic_Abstract
                 );
 
                 // get user data for thread
-                $poll['userInfo'] = $this->getUserModel()
-                    ->getUserById($thread['user_id']);
+                $poll['userInfo'] = $this->getUserModel()->getUserById(
+                    $thread['user_id']
+                );
 
                 // put the lime in the coconut
-                $finals[] = array_merge_recursive($poll, $thread);
-            } catch (\XenForo_ControllerResponse_Exception $e) {
+                $polls[] = array_merge_recursive($poll, $thread);
+            } catch (\XenForo_ControllerResponse_Exception $exception) {
                 // no johnny! don't do it!
             };
         }
 
         $viewParams = [
-            'polls'      => $finals,
-            'pollsTotal' => count($finals)
+            'polls'      => $polls,
+            'pollsTotal' => count($polls)
         ];
 
         return $this->responseView(
